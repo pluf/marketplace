@@ -18,7 +18,7 @@
  */
 Pluf::loadFunction('Pluf_Shortcuts_GetObjectOr404');
 Pluf::loadFunction('Marketplace_Shortcuts_SpaManager');
-Pluf::loadFunction('Pluf_Form_Field_File_moveToUploadFolder');
+Pluf::loadFunction('Marketplace_Shortcuts_GetSpaOr404ByName');
 
 /**
  * Manages spas
@@ -30,43 +30,41 @@ class Marketplace_Views_Spa extends Pluf_Views
 {
 
     /**
-     * Creates new instance of spa
+     * Get an spa
      *
      * @param Pluf_HTTP_Request $request
      * @param array $match
      */
-    public function get ($request, $match)
+    public function get($request, $match)
     {
-        // 1- upload & extract
-        $key = 'spa-' . md5(microtime() . rand(0, 123456789));
-        Pluf_Form_Field_File_moveToUploadFolder($request->FILES['file'],
-                array(
-                        'file_name' => $key . '.zip',
-                        'upload_path' => Pluf::f('temp_folder', '/tmp'),
-                        'upload_path_create' => true,
-                        'upload_overwrite' => true
-                ));
-        return new Pluf_HTTP_Response_Json($spa);
+        if (array_key_exists('modelId', $match)) {
+            $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
+        } else {
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
+        }
+        Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'read');
+        return $spa;
     }
-    
+
     /**
      * Creates new instance of spa
      *
      * @param Pluf_HTTP_Request $request
      * @param array $match
      */
-    public function create ($request, $match)
+    public function create($request, $match)
     {
         // 1- upload & extract
-        $key = 'spa-' . md5(microtime() . rand(0, 123456789));
-        Pluf_Form_Field_File_moveToUploadFolder($request->FILES['file'],
-                array(
-                        'file_name' => $key . '.zip',
-                        'upload_path' => Pluf::f('temp_folder', '/tmp'),
-                        'upload_path_create' => true,
-                        'upload_overwrite' => true
-                ));
-        return new Pluf_HTTP_Response_Json($spa);
+        $spa = new Marketplace_Spa();
+        $spa->name = 'name' . rand();
+        $spa->create();
+        try {
+            Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'create');
+            return $spa;
+        } catch (Exception $e) {
+            $spa->delete();
+            throw $e;
+        }
     }
 
     /**
@@ -75,51 +73,31 @@ class Marketplace_Views_Spa extends Pluf_Views
      * @param Pluf_HTTP_Request $request
      * @param array $match
      */
-    public function update ($request, $match)
+    public function update($request, $match)
     {
-        $spa = Pluf_Shortcuts_GetObjectOr404('Spa_SPA', $match['spaId']);
-        self::remdir($spa->path);
-        // 1- upload & extract
-        Pluf_Form_Field_File_moveToUploadFolder($request->FILES['file'],
-                array(
-                        'file_name' => 'spa.zip',
-                        'upload_path' => $spa->path,
-                        'upload_path_create' => true,
-                        'upload_overwrite' => true
-                ));
-        $zip = new ZipArchive();
-        if ($zip->open($spa->path . '/spa.zip') === TRUE) {
-            $zip->extractTo($spa->path);
-            $zip->close();
+        if (array_key_exists('modelId', $match)) {
+            $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
         } else {
-            throw new Pluf_Exception('fail to extract zip package');
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
         }
-        unlink($spa->path . '/spa.zip');
-        
-        // 2- load infor
-        $filename = $spa->path . '/' . Pluf::f('spa_config', "spa.json");
-        $myfile = fopen($filename, "r") or die("Unable to open file!");
-        $json = fread($myfile, filesize($filename));
-        fclose($myfile);
-        $package = json_decode($json, true);
-        
-        // 3- update spa
-        $spa->setFromFormData($package);
-        $spa->update();
-        
-        return new Pluf_HTTP_Response_Json($spa);
+        Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
+        return $spa;
     }
 
     /**
+     * Delete an spa
      *
      * @param Pluf_HTTP_Request $request
      * @param array $match
      */
-    public function delete ($request, $match)
+    public function delete($request, $match)
     {
-        $spa = Pluf_Shortcuts_GetObjectOr404('Spa_SPA', $match['spaId']);
-        Pluf_FileUtil::removedir($spa->path);
-        $spa->delete();
-        return new Pluf_HTTP_Response_Json($spa);
+        if (array_key_exists('modelId', $match)) {
+            $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
+        } else {
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
+        }
+        Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'delete');
+        return $spa;
     }
 }

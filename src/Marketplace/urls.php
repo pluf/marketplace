@@ -61,10 +61,24 @@ return array(
         'model' => 'Marketplace_Views_Spa',
         'method' => 'get',
         'http-method' => 'GET',
-        'precond' => array(),
-        'params' => array(
-            'model' => 'Spa_SPA'
-        )
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelId>\d+)/download$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'download',
+        'http-method' => 'GET',
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelName>\.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'get',
+        'http-method' => 'GET',
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelName>\.+)/download$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'download',
+        'http-method' => 'GET',
     ),
     array(
         'regex' => '#^/spa/new$#',
@@ -76,7 +90,7 @@ return array(
         )
     ),
     array(
-        'regex' => '#^/spa/(?P<spaId>.+)$#',
+        'regex' => '#^/spa/(?P<modelId>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'update',
         'http-method' => 'POST',
@@ -85,7 +99,7 @@ return array(
         )
     ),
     array(
-        'regex' => '#^/spa/(?P<spaId>.+)$#',
+        'regex' => '#^/spa/(?P<modelId>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'delete',
         'http-method' => 'DELETE',

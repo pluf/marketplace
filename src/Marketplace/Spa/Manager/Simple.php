@@ -1,5 +1,7 @@
 <?php
 
+Pluf::loadFunction('Marketplace_Shortcuts_SpaUpdate');
+
 /**
  * Simple SPA management
  * 
@@ -16,7 +18,15 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
      */
     static $STATE_MACHINE = array(
         Workflow_Machine::STATE_UNDEFINED => array(
-            'next' => 'Published'
+            'next' => 'Published',
+            'visible' => false,
+            'action' => array(
+                'Marketplace_Spa_Manager_Simple',
+                'update'
+            ),
+            'preconditions' => array(
+                'Pluf_Precondition::isOwner'
+            )
         ),
         // State
         'Published' => array(
@@ -72,9 +82,11 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
     {
         $machine = new Workflow_Machine();
         $machine->setStates(self::$STATE_MACHINE)
-            ->setSignals(array('Marketplace_Spa::stateChange'))
+            ->setSignals(array(
+            'Marketplace_Spa::stateChange'
+        ))
             ->setProperty('state')
-            ->apply($object, $action);
+            ->apply($spa, $action);
         return true;
     }
 
@@ -92,25 +104,25 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
         }
         return $states;
     }
-    
+
     /**
      * Update an spa
      *
      * @param Pluf_HTTP_Request $request
      * @param Marketplace_Spa $object
      */
-    public static function update ($request, $object)
+    public static function update($request, $object)
     {
-        Pluf_Shortcuts_GetFormForUpdateModel($object, $request->REQUEST)->save();
+        return Marketplace_Shortcuts_SpaUpdate($request, $object);
     }
-    
+
     /**
      * Deletes an spa
      *
      * @param Pluf_HTTP_Request $request
      * @param Marketplace_Spa $object
      */
-    public static function delete ($request, $object)
+    public static function delete($request, $object)
     {
         $object->deleted = true;
         $object->update();
