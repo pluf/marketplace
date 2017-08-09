@@ -17,80 +17,80 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 return array(
-        array(
-                'regex' => '#^spa/find$#',
-                'model' => 'Pluf_Views',
-                'method' => 'findObject',
-                'http-method' => 'GET',
-                'precond' => array(),
-                'params' => array(
-                        'model' => 'Marketplace_Spa',
-                        'listFilters' => array(
-                                'id',
-                                'title',
-                                'symbol'
-                        ),
-                        'listDisplay' => array(
-                                'id' => 'spa id',
-                                'title' => 'title',
-                                'creation_dtime' => 'creation time'
-                        ),
-                        '$searchFields' => array(
-                                'name',
-                                'title',
-                                'description',
-                                'homepage'
-                        ),
-                        'sortFields' => array(
-                                'id',
-                                'name',
-                                'title',
-                                'homepage',
-                                'license',
-                                'version',
-                                'creation_dtime'
-                        ),
-                        'sortOrder' => array(
-                                'creation_dtime',
-                                'DESC'
-                        )
-                )
-        ),
-        array(
-                'regex' => '#^spa/(?P<modelId>\d+)$#',
-                'model' => 'Marketplace_Views_Spa',
-                'method' => 'get',
-                'http-method' => 'GET',
-                'precond' => array(),
-                'params' => array(
-                        'model' => 'Spa_SPA'
-                )
-        ),
-        array(
-                'regex' => '#^spa/new$#',
-                'model' => 'Marketplace_Views_Spa',
-                'method' => 'create',
-                'http-method' => 'POST',
-                'precond' => array(
-                        'Pluf_Precondition::ownerRequired'
-                )
-        ),
-        array(
-                'regex' => '#^spa/(?P<spaId>.+)$#',
-                'model' => 'Marketplace_Views_Spa',
-                'method' => 'update',
-                'http-method' => 'POST',
-                'precond' => array(
-                        'Pluf_Precondition::ownerRequired'
-                )
-        ),
-        array(
-                'regex' => '#^spa/(?P<spaId>.+)$#',
-                'model' => 'Marketplace_Views_Spa',
-                'method' => 'delete',
-                'http-method' => 'DELETE',
-                'precond' => array(
-                        'Pluf_Precondition::ownerRequired'
-                )
+    array(
+        'regex' => '#^/spa/find$#',
+        'model' => 'Pluf_Views',
+        'method' => 'findObject',
+        'http-method' => 'GET',
+        'precond' => array(),
+        'params' => array(
+            'model' => 'Marketplace_Spa',
+            'listFilters' => array(
+                'id',
+                'title',
+                'symbol'
+            ),
+            'listDisplay' => array(
+                'id' => 'spa id',
+                'title' => 'title',
+                'creation_dtime' => 'creation time'
+            ),
+            '$searchFields' => array(
+                'name',
+                'title',
+                'description',
+                'homepage'
+            ),
+            'sortFields' => array(
+                'id',
+                'name',
+                'title',
+                'homepage',
+                'license',
+                'version',
+                'creation_dtime'
+            ),
+            'sortOrder' => array(
+                'creation_dtime',
+                'DESC'
+            )
         )
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelId>\d+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'get',
+        'http-method' => 'GET',
+        'precond' => array(),
+        'params' => array(
+            'model' => 'Spa_SPA'
+        )
+    ),
+    array(
+        'regex' => '#^/spa/new$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'create',
+        'http-method' => 'POST',
+        'precond' => array(
+            'Pluf_Precondition::ownerRequired'
+        )
+    ),
+    array(
+        'regex' => '#^/spa/(?P<spaId>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'update',
+        'http-method' => 'POST',
+        'precond' => array(
+            'Pluf_Precondition::ownerRequired'
+        )
+    ),
+    array(
+        'regex' => '#^/spa/(?P<spaId>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'delete',
+        'http-method' => 'DELETE',
+        'precond' => array(
+            'Pluf_Precondition::ownerRequired'
+        )
+    )
 );
