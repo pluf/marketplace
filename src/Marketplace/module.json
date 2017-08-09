@@ -5,5 +5,6 @@
 	"model": [
 		"Marketplace_Spa"
 	],
-	"permisson": []
+	"permisson": [],
+	"monitors":[]
 }

@@ -46,8 +46,6 @@ class Marketplace_Views_Spa extends Pluf_Views
                         'upload_path_create' => true,
                         'upload_overwrite' => true
                 ));
-        $spa = Spa_Service::installFromFile(
-                Pluf::f('temp_folder', '/tmp') . '/' . $key . '.zip', true);
         return new Pluf_HTTP_Response_Json($spa);
     }
 

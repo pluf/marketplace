@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of Pluf Framework, a simple PHP Application Framework.
  * Copyright (C) 2010-2020 Phoinex Scholars Co. (http://dpq.co.ir)
@@ -18,25 +19,17 @@
  */
 
 /**
- * 
- * @author maso
- * @author hadi <mohammad.hadi.mansouri@dpq.co.ir>
  *
+ * @author maso<mostafa.barmshory@dpq.co.ir>
+ * @author hadi <mohammad.hadi.mansouri@dpq.co.ir>
+ *        
  */
 class Marketplace_Spa extends Pluf_Model
 {
 
     /**
-     * دایرکتوری ریشه spa که حاوی فایل spa.json و سایر فایل‌ها و پوشه‌های spa
-     * است
      *
-     * @var rootPath
-     */
-    var $rootPath = null;
-
-    /**
-     * (non-PHPdoc)
-     *
+     * {@inheritdoc}
      * @see Pluf_Model::init()
      */
     function init ()
@@ -67,6 +60,13 @@ class Marketplace_Spa extends Pluf_Model
                         'size' => 50,
                         'readable' => true,
                         'editable' => true
+                ),
+                'state' => array(
+                        'type' => 'Pluf_DB_Field_Varchar',
+                        'blank' => false,
+                        'size' => 50,
+                        'readable' => true,
+                        'editable' => false
                 ),
                 'license' => array(
                         'type' => 'Pluf_DB_Field_Varchar',
@@ -120,15 +120,13 @@ class Marketplace_Spa extends Pluf_Model
                 )
         );
         
-        $this->_a['views'] = array()
-        ;
+        $this->_a['views'] = array();
     }
 
     /**
-     * پیش ذخیره را انجام می‌دهد
      *
-     * @param $create حالت
-     *            ساخت یا به روز رسانی را تعیین می‌کند
+     * {@inheritdoc}
+     * @see Pluf_Model::preSave()
      */
     function preSave ($create = false)
     {
@@ -139,8 +137,8 @@ class Marketplace_Spa extends Pluf_Model
     }
 
     /**
-     * (non-PHPdoc)
      *
+     * {@inheritdoc}
      * @see Pluf_Model::preDelete()
      */
     function preDelete ()
@@ -150,67 +148,5 @@ class Marketplace_Spa extends Pluf_Model
         // TODO: maso, 1395: از signal-slot استفاده شود و یک signal ارسال شود تا
         // سایرین که به
         // این spa وابسته هستند داده‌های مربوطه‌شان را حذف کنند.
-    }
-
-    /**
-     * حالت کار ایجاد شده را به روز می‌کند
-     *
-     * @see Pluf_Model::postSave()
-     */
-    function postSave ($create = false)
-    {
-        //
-    }
-
-    /**
-     * مسیر دایرکتوری ریشه spa را برمی گرداند.
-     *
-     * @throws Pluf_Exception
-     * @return
-     *
-     */
-    public function getRootPath ()
-    {
-        return $this->path;
-    }
-
-    /**
-     * مسیر فایل اصلی برای نمایش spa را برمی‌گرداند.
-     * به عنوان مثال مسیر فایل index.html
-     * در صورتی که در تنظمیات spa فایل main_page تعیین نشده باشد
-     * نام index.html به عنوان نام پیش‌فرض صفحه اصلی در نظر گرفته می‌شود
-     *
-     * @return string
-     */
-    public function getMainPagePath ()
-    {
-        if ($this->main_page)
-            return $this->getRootPath() . '/' . $this->main_page;
-        return $this->getRootPath() . '/index.html';
-    }
-
-    /**
-     * spa با نام تعیین شده را برمی‌گرداند.
-     * فرض می‌شود که نام spa ها یکتاست. در غیر این صورت
-     * اولین spa که نامش با نام تعیین شده یکی باشد برگردانده می‌شود
-     *
-     * @param string $name نام
-     * @param Pluf_Tenant $tenant            
-     */
-    public static function getSpaByName ($name)
-    {
-        $sql = new Pluf_SQL('name=%s', array($name));
-        return Pluf::factory('Spa_SPA')->getOne($sql->gen());
-    }
-
-    /**
-     * مسیر فایل منبع از نرم افزار را تعیین می‌کند.
-     *
-     * @param unknown $name            
-     * @return string
-     */
-    public function getResourcePath ($name)
-    {
-        return $this->getRootPath() . '/' . $name;
     }
 }
