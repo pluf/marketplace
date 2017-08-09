@@ -46,6 +46,10 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
                 'next' => 'Published',
                 'visible' => false
             ),
+            'download' => array(
+                'next' => 'Published',
+                'visible' => false
+            ),
             'delete' => array(
                 'next' => 'Deleted',
                 'visible' => false,

@@ -1,9 +1,8 @@
 <?php
-
 Pluf::loadFunction('Pluf_Form_Field_File_moveToUploadFolder');
 
 /**
- * 
+ *
  * @param Marketplace_Spa $spa
  * @return Marketplace_Spa_Manager_Simple
  */
@@ -22,7 +21,7 @@ function Marketplace_Shortcuts_SpaManager($spa)
 function Marketplace_Shortcuts_SpaUpdate($request, $spa)
 {
     // Upload file
-    $path = Pluf::f('temp_folder', '/tmp') .'/'. $spa->id . '.zip';
+    $path = Pluf::f('temp_folder', '/tmp') . '/' . $spa->id . '.zip';
     Pluf_Form_Field_File_moveToUploadFolder($request->FILES['file'], array(
         'file_name' => $spa->id . '.zip',
         'upload_path' => Pluf::f('temp_folder', '/tmp'),
@@ -66,16 +65,19 @@ function Marketplace_Shortcuts_SpaUpdate($request, $spa)
 
 /**
  * Get Spa
- * 
+ *
  * @param String $name
  * @throws Pluf_HTTP_Error404
  * @return Marketplace_Spa
  */
-function Marketplace_Shortcuts_GetSpaOr404ByName($name){
-    $item = Pluf::factory('Marketplace_Spa')->getOne('name='.$name);
+function Marketplace_Shortcuts_GetSpaOr404ByName($name)
+{
+    $sql = new Pluf_SQL('name=%s', array(
+        $name
+    ));
+    $item = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
     if (isset($item) && $item->name == $name) {
         return $item;
     }
-    throw new Pluf_HTTP_Error404(
-        "Object not found (SAP," . $name . ")");
+    throw new Pluf_HTTP_Error404("Object not found (SAP," . $name . ")");
 }

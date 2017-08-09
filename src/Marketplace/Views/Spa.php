@@ -40,7 +40,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         if (array_key_exists('modelId', $match)) {
             $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
         } else {
-            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'read');
         return $spa;
@@ -78,7 +78,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         if (array_key_exists('modelId', $match)) {
             $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
         } else {
-            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
         return $spa;
@@ -95,9 +95,26 @@ class Marketplace_Views_Spa extends Pluf_Views
         if (array_key_exists('modelId', $match)) {
             $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
         } else {
-            $spa = Marketplace_Shortcuts_GetSpaOr404ByName('Marketplace_Spa', $match['modelName']);
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'delete');
         return $spa;
+    }
+    
+    /**
+     * Download an spa
+     *
+     * @param Pluf_HTTP_Request $request
+     * @param array $match
+     */
+    public function download($request, $match)
+    {
+        if (array_key_exists('modelId', $match)) {
+            $spa = Pluf_Shortcuts_GetObjectOr404('Marketplace_Spa', $match['modelId']);
+        } else {
+            $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
+        }
+        Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'download');
+        return new Pluf_HTTP_Response_File($spa->file, 'application/zip');
     }
 }

@@ -69,18 +69,6 @@ return array(
         'http-method' => 'GET',
     ),
     array(
-        'regex' => '#^/spa/(?P<modelName>\.+)$#',
-        'model' => 'Marketplace_Views_Spa',
-        'method' => 'get',
-        'http-method' => 'GET',
-    ),
-    array(
-        'regex' => '#^/spa/(?P<modelName>\.+)/download$#',
-        'model' => 'Marketplace_Views_Spa',
-        'method' => 'download',
-        'http-method' => 'GET',
-    ),
-    array(
         'regex' => '#^/spa/new$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'create',
@@ -106,5 +94,17 @@ return array(
         'precond' => array(
             'Pluf_Precondition::ownerRequired'
         )
-    )
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelName>.+)/download$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'download',
+        'http-method' => 'GET',
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelName>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'get',
+        'http-method' => 'GET',
+    ),
 );
