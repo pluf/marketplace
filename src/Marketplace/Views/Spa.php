@@ -17,20 +17,40 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 Pluf::loadFunction('Pluf_Shortcuts_GetObjectOr404');
-Pluf::loadFunction('Pluf_Shortcuts_GetFormForModel');
+Pluf::loadFunction('Marketplace_Shortcuts_SpaManager');
 Pluf::loadFunction('Pluf_Form_Field_File_moveToUploadFolder');
 
 /**
  * Manages spas
  *
- * @author maso
+ * @author maso<mostafa.barmshory@dpq.co.ir>
  *        
  */
 class Marketplace_Views_Spa extends Pluf_Views
 {
 
     /**
-     * Creates new instance of the application
+     * Creates new instance of spa
+     *
+     * @param Pluf_HTTP_Request $request
+     * @param array $match
+     */
+    public function get ($request, $match)
+    {
+        // 1- upload & extract
+        $key = 'spa-' . md5(microtime() . rand(0, 123456789));
+        Pluf_Form_Field_File_moveToUploadFolder($request->FILES['file'],
+                array(
+                        'file_name' => $key . '.zip',
+                        'upload_path' => Pluf::f('temp_folder', '/tmp'),
+                        'upload_path_create' => true,
+                        'upload_overwrite' => true
+                ));
+        return new Pluf_HTTP_Response_Json($spa);
+    }
+    
+    /**
+     * Creates new instance of spa
      *
      * @param Pluf_HTTP_Request $request
      * @param array $match

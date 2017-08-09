@@ -24,7 +24,7 @@ return array(
                 'http-method' => 'GET',
                 'precond' => array(),
                 'params' => array(
-                        'model' => 'Spa_SPA',
+                        'model' => 'Marketplace_Spa',
                         'listFilters' => array(
                                 'id',
                                 'title',
@@ -58,8 +58,8 @@ return array(
         ),
         array(
                 'regex' => '#^spa/(?P<modelId>\d+)$#',
-                'model' => 'Pluf_Views',
-                'method' => 'getObject',
+                'model' => 'Marketplace_Views_Spa',
+                'method' => 'get',
                 'http-method' => 'GET',
                 'precond' => array(),
                 'params' => array(
@@ -68,7 +68,7 @@ return array(
         ),
         array(
                 'regex' => '#^spa/new$#',
-                'model' => 'Spa_Views',
+                'model' => 'Marketplace_Views_Spa',
                 'method' => 'create',
                 'http-method' => 'POST',
                 'precond' => array(
@@ -77,7 +77,7 @@ return array(
         ),
         array(
                 'regex' => '#^spa/(?P<spaId>.+)$#',
-                'model' => 'Spa_Views',
+                'model' => 'Marketplace_Views_Spa',
                 'method' => 'update',
                 'http-method' => 'POST',
                 'precond' => array(
@@ -86,7 +86,7 @@ return array(
         ),
         array(
                 'regex' => '#^spa/(?P<spaId>.+)$#',
-                'model' => 'Spa_Views',
+                'model' => 'Marketplace_Views_Spa',
                 'method' => 'delete',
                 'http-method' => 'DELETE',
                 'precond' => array(
