@@ -1,0 +1,10 @@
+{
+	"name": "Marketplace",
+	"version": "0.1.0",
+	"title": "Pluf market place",
+	"model": [
+		"Marketplace_Spa"
+	],
+	"permisson": [],
+	"monitors":[]
+}
