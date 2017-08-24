@@ -85,6 +85,27 @@ class Marketplace_Views_Spa extends Pluf_Views
     }
 
     /**
+     * Update by token
+     * @param Pluf_HTTP_Request $request
+     * @param array $match
+     * @throws Pluf_HTTP_Error404
+     * @return Marketplace_Spa
+     */
+    public function updateByToken($request, $match)
+    {
+        $request->REQUEST['token'] = $match['token'];
+        $sql = new Pluf_SQL('token=%s', array(
+            $match['token']
+        ));
+        $spa = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
+        if (! isset($spa)) {
+            throw new Pluf_HTTP_Error404("Object not found (SAP," . $match['token'] . ")");
+        }
+        Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
+        return $spa;
+    }
+
+    /**
      * Delete an spa
      *
      * @param Pluf_HTTP_Request $request
@@ -100,7 +121,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'delete');
         return $spa;
     }
-    
+
     /**
      * Download an spa
      *
