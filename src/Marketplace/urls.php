@@ -78,7 +78,13 @@ return array(
         )
     ),
     array(
-        'regex' => '#^/spa/(?P<modelId>.+)$#',
+        'regex' => '#^/spa/token-(?P<token>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'updateByToken',
+        'http-method' => 'POST',
+    ),
+    array(
+        'regex' => '#^/spa/(?P<modelName>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'update',
         'http-method' => 'POST',
@@ -87,7 +93,7 @@ return array(
         )
     ),
     array(
-        'regex' => '#^/spa/(?P<modelId>.+)$#',
+        'regex' => '#^/spa/(?P<modelName>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'delete',
         'http-method' => 'DELETE',

@@ -72,6 +72,7 @@ function Marketplace_Shortcuts_SpaUpdate($request, $spa)
  */
 function Marketplace_Shortcuts_GetSpaOr404ByName($name)
 {
+    // Get by name
     $sql = new Pluf_SQL('name=%s', array(
         $name
     ));
@@ -79,5 +80,6 @@ function Marketplace_Shortcuts_GetSpaOr404ByName($name)
     if (isset($item) && $item->name == $name) {
         return $item;
     }
+    
     throw new Pluf_HTTP_Error404("Object not found (SAP," . $name . ")");
 }

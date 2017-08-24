@@ -22,7 +22,7 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
             'visible' => false,
             'action' => array(
                 'Marketplace_Spa_Manager_Simple',
-                'update'
+                'create'
             ),
             'preconditions' => array(
                 'Pluf_Precondition::isOwner'
@@ -55,7 +55,7 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
                 'visible' => false,
                 'action' => array(
                     'Marketplace_Spa_Manager_Simple',
-                    'update'
+                    'delete'
                 ),
                 'preconditions' => array(
                     'Pluf_Precondition::isOwner'
@@ -108,6 +108,18 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
         }
         return $states;
     }
+    
+    /**
+     * Create and spa
+     * 
+     * @param Pluf_HTTP_Request $request
+     * @param Marketplace_Spa $object
+     */
+    public static function create($request, $object){
+        $object->token =  chunk_split ( substr ( md5 ( time () . rand ( 10000, 99999 ) ), 0, 20 ), 6, '' );
+        $object->update();
+        return self::update($request, $object);
+    }
 
     /**
      * Update an spa
@@ -128,7 +140,6 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
      */
     public static function delete($request, $object)
     {
-        $object->deleted = true;
-        $object->update();
+        $object->delete();
     }
 }

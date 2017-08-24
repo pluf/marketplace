@@ -61,6 +61,13 @@ class Marketplace_Spa extends Pluf_Model
                         'readable' => true,
                         'editable' => true
                 ),
+                'token' => array(
+                        'type' => 'Pluf_DB_Field_Varchar',
+                        'blank' => true,
+                        'size' => 50,
+                        'readable' => false,
+                        'editable' => false
+                ),
                 'state' => array(
                         'type' => 'Pluf_DB_Field_Varchar',
                         'blank' => false,
