@@ -1,12 +1,11 @@
 <?php
-
 Pluf::loadFunction('Marketplace_Shortcuts_SpaUpdate');
 
 /**
  * Simple SPA management
- * 
- * @author maso<mostafa.barmshory@dpq.co.ir>
  *
+ * @author maso<mostafa.barmshory@dpq.co.ir>
+ *        
  */
 class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
 {
@@ -85,13 +84,12 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
     public function apply($spa, $action)
     {
         $machine = new Workflow_Machine();
-        $machine->setStates(self::$STATE_MACHINE)
+        return $machine->setStates(self::$STATE_MACHINE)
             ->setSignals(array(
             'Marketplace_Spa::stateChange'
         ))
             ->setProperty('state')
             ->apply($spa, $action);
-        return true;
     }
 
     /**
@@ -108,15 +106,16 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
         }
         return $states;
     }
-    
+
     /**
      * Create and spa
-     * 
+     *
      * @param Pluf_HTTP_Request $request
      * @param Marketplace_Spa $object
      */
-    public static function create($request, $object){
-        $object->token =  chunk_split ( substr ( md5 ( time () . rand ( 10000, 99999 ) ), 0, 20 ), 6, '' );
+    public static function create($request, $object)
+    {
+        $object->token = chunk_split(substr(md5(time() . rand(10000, 99999)), 0, 20), 6, '');
         $object->update();
         return self::update($request, $object);
     }
