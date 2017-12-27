@@ -19,6 +19,7 @@
  */
 
 /**
+ * An SPA data model in market place
  *
  * @author maso<mostafa.barmshory@dpq.co.ir>
  * @author hadi <mohammad.hadi.mansouri@dpq.co.ir>
