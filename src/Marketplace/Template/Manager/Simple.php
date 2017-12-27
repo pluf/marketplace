@@ -1,13 +1,12 @@
 <?php
-Pluf::loadFunction('Marketplace_Shortcuts_SpaUpdate');
 
 /**
- * Simple SPA management
+ * Simple Template management
  *
  * @author maso<mostafa.barmshory@dpq.co.ir>
  *        
  */
-class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
+class Marketplace_Template_Manager_Simple implements Marketplace_Spa_Manager
 {
 
     /**
@@ -20,7 +19,7 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
             'next' => 'Published',
             'visible' => false,
             'action' => array(
-                'Marketplace_Spa_Manager_Simple',
+                'Marketplace_Template_Manager_Simple',
                 'create'
             ),
             'preconditions' => array(
@@ -128,7 +127,8 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
      */
     public static function update($request, $object)
     {
-        return Marketplace_Shortcuts_SpaUpdate($request, $object);
+        Pluf::loadFunction('Marketplace_Shortcuts_TemplateUpdate');
+        return Marketplace_Shortcuts_TemplateUpdate($request, $object);
     }
 
     /**

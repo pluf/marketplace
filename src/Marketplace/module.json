@@ -3,7 +3,8 @@
 	"version": "2.1.8",
 	"title": "Pluf market place",
 	"model": [
-		"Marketplace_Spa"
+		"Marketplace_Spa",
+		"Marketplace_Template"
 	],
 	"permisson": [],
 	"monitors":[]
