@@ -1,6 +1,6 @@
 {
-	"name" : "pluf/marketplace",
-	"description" : "Marketplace module of pluf",
+	"name" : "pluf/user",
+	"description" : "A module for Pluf to manage user profiles and user accounts",
 	"type" : "library",
 	"license" : "MIT",
 	"authors" : [{
@@ -15,26 +15,31 @@
 			"role" : "developer"
 		}
 	],
-	"minimum-stability" : "stable",
 	"require" : {
-		"pluf/core" : "^3.0.0"
+		"pluf/core" : "^3.0.0",
+		"pluf/user" : "^3.0.0",
+		"pluf/setting" : "^3.0.0"
+	},
+	"require-dev" : {
+		"pluf/test" : "^3.0.0"
 	},
 	"include-path" : [
 		"src/"
 	],
-	"homepage" : "https://github.com/pluf/spa",
+	"homepage" : "https://github.com/pluf/user",
 	"support" : {
 		"email" : "info@pluf.ir",
-		"issues" : "https://github.com/pluf/marketplace/issues",
-		"forum" : "https://github.com/pluf/marketplace",
-		"wiki" : "https://github.com/pluf/marketplace/wiki",
-		"source" : "https://github.com/pluf/marketplace"
+		"issues" : "https://github.com/pluf/user/issues",
+		"forum" : "https://github.com/pluf/user",
+		"wiki" : "https://github.com/pluf/user/wiki",
+		"source" : "https://github.com/pluf/user"
 	},
 	"keywords" : [
-		"spa",
 		"pluf",
-		"php",
-		"market",
-		"download"
-	]
+		"pluf-module",
+		"user",
+		"profile",
+		"account"
+	],
+	"minimum-stability" : "stable"
 }
