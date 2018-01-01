@@ -1,6 +1,6 @@
 {
-	"name" : "pluf/user",
-	"description" : "A module for Pluf to manage user profiles and user accounts",
+	"name" : "pluf/marketplace",
+	"description" : "A module for Pluf to implement a marketplace for SPAs",
 	"type" : "library",
 	"license" : "MIT",
 	"authors" : [{
@@ -26,20 +26,18 @@
 	"include-path" : [
 		"src/"
 	],
-	"homepage" : "https://github.com/pluf/user",
+	"homepage" : "https://github.com/pluf/marketplace",
 	"support" : {
 		"email" : "info@pluf.ir",
-		"issues" : "https://github.com/pluf/user/issues",
-		"forum" : "https://github.com/pluf/user",
-		"wiki" : "https://github.com/pluf/user/wiki",
-		"source" : "https://github.com/pluf/user"
+		"issues" : "https://github.com/pluf/marketplace/issues",
+		"forum" : "https://github.com/pluf/marketplace",
+		"wiki" : "https://github.com/pluf/marketplace/wiki",
+		"source" : "https://github.com/pluf/marketplace"
 	},
 	"keywords" : [
 		"pluf",
 		"pluf-module",
-		"user",
-		"profile",
-		"account"
+		"marketplace"
 	],
 	"minimum-stability" : "stable"
 }
