@@ -36,7 +36,7 @@ class Marketplace_Template extends Pluf_Model
      */
     function init ()
     {
-        $this->_a['table'] = 'cms_content';
+        $this->_a['table'] = 'marketplace_template';
         $this->_a['cols'] = array(
             // شناسه‌ها
             'id' => array(
