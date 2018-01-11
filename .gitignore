@@ -2,6 +2,7 @@
 .project
 .settings
 /.buildpath
+/build
 
 # Composer
 /vendor/
