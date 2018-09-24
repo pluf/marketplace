@@ -77,7 +77,7 @@ class Marketplace_Template extends Pluf_Model
                 'type' => 'Pluf_DB_Field_Varchar',
                 'blank' => true,
                 'size' => 250,
-                'default' => 'auto created content',
+                'default' => 'auto created template',
                 'editable' => true
             ),
             'mime_type' => array(
