@@ -17,59 +17,11 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 return array(
-    array(
-        'regex' => '#^/spa/find$#',
-        'model' => 'Pluf_Views',
-        'method' => 'findObject',
-        'http-method' => 'GET',
-        'precond' => array(),
-        'params' => array(
-            'model' => 'Marketplace_Spa',
-            'listFilters' => array(
-                'id',
-                'title',
-                'symbol'
-            ),
-            'listDisplay' => array(
-                'id' => 'spa id',
-                'title' => 'title',
-                'creation_dtime' => 'creation time'
-            ),
-            '$searchFields' => array(
-                'name',
-                'title',
-                'description',
-                'homepage'
-            ),
-            'sortFields' => array(
-                'id',
-                'name',
-                'title',
-                'homepage',
-                'license',
-                'version',
-                'creation_dtime'
-            ),
-            'sortOrder' => array(
-                'creation_dtime',
-                'DESC'
-            )
-        )
-    ),
-    array(
-        'regex' => '#^/spa/(?P<modelId>\d+)$#',
-        'model' => 'Marketplace_Views_Spa',
-        'method' => 'get',
-        'http-method' => 'GET',
-    ),
-    array(
-        'regex' => '#^/spa/(?P<modelId>\d+)/download$#',
-        'model' => 'Marketplace_Views_Spa',
-        'method' => 'download',
-        'http-method' => 'GET',
-    ),
-    array(
-        'regex' => '#^/spa/new$#',
+    /*
+     * SPA
+     */
+    array( // Create
+        'regex' => '#^/spas$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'create',
         'http-method' => 'POST',
@@ -77,14 +29,40 @@ return array(
             'User_Precondition::ownerRequired'
         )
     ),
-    array(
-        'regex' => '#^/spa/token-(?P<token>.+)$#',
+    array( // Read (list)
+        'regex' => '#^/spas$#',
+        'model' => 'Pluf_Views',
+        'method' => 'findObject',
+        'http-method' => 'GET',
+        'precond' => array(),
+        'params' => array(
+            'model' => 'Marketplace_Spa',
+            'sortOrder' => array(
+                'creation_dtime',
+                'DESC'
+            )
+        )
+    ),
+    array( // Read
+        'regex' => '#^/spas/(?P<modelId>\d+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'get',
+        'http-method' => 'GET'
+    ),
+    array( // Read (file)
+        'regex' => '#^/spas/(?P<modelId>\d+)/file$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'download',
+        'http-method' => 'GET'
+    ),
+    array( // Update (by token)
+        'regex' => '#^/spas/token-(?P<token>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'updateByToken',
-        'http-method' => 'POST',
+        'http-method' => 'POST'
     ),
-    array(
-        'regex' => '#^/spa/(?P<modelName>.+)$#',
+    array( // Update (by id)
+        'regex' => '#^/spas/(?P<modelName>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'update',
         'http-method' => 'POST',
@@ -92,8 +70,8 @@ return array(
             'User_Precondition::ownerRequired'
         )
     ),
-    array(
-        'regex' => '#^/spa/(?P<modelName>.+)$#',
+    array( // Delete
+        'regex' => '#^/spas/(?P<modelName>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'delete',
         'http-method' => 'DELETE',
@@ -101,16 +79,19 @@ return array(
             'User_Precondition::ownerRequired'
         )
     ),
+    /*
+     * Template
+     */
     array(
-        'regex' => '#^/spa/(?P<modelName>.+)/download$#',
-        'model' => 'Marketplace_Views_Spa',
+        'regex' => '#^/templates/(?P<modelName>.+)/file$#',
+        'model' => 'Marketplace_Views_Template',
         'method' => 'download',
-        'http-method' => 'GET',
+        'http-method' => 'GET'
     ),
     array(
-        'regex' => '#^/spa/(?P<modelName>.+)$#',
-        'model' => 'Marketplace_Views_Spa',
+        'regex' => '#^/template/(?P<modelName>.+)$#',
+        'model' => 'Marketplace_Views_Template',
         'method' => 'get',
-        'http-method' => 'GET',
-    ),
+        'http-method' => 'GET'
+    )
 );
