@@ -55,14 +55,8 @@ return array(
         'method' => 'download',
         'http-method' => 'GET'
     ),
-    array( // Update (by token)
-        'regex' => '#^/spas/token-(?P<token>.+)$#',
-        'model' => 'Marketplace_Views_Spa',
-        'method' => 'updateByToken',
-        'http-method' => 'POST'
-    ),
-    array( // Update (by id)
-        'regex' => '#^/spas/(?P<modelName>.+)$#',
+    array( // Update
+        'regex' => '#^/spas/(?P<modelId>\d+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'update',
         'http-method' => 'POST',
@@ -71,6 +65,42 @@ return array(
         )
     ),
     array( // Delete
+        'regex' => '#^/spas/(?P<modelId>\d+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'delete',
+        'http-method' => 'DELETE',
+        'precond' => array(
+            'User_Precondition::ownerRequired'
+        )
+    ),
+    array( // Update (by token)
+        'regex' => '#^/spas/token-(?P<token>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'updateByToken',
+        'http-method' => 'POST'
+    ),
+    array( // Update (by name)
+        'regex' => '#^/spas/(?P<modelName>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'update',
+        'http-method' => 'POST',
+        'precond' => array(
+            'User_Precondition::ownerRequired'
+        )
+    ),
+    array( // Read (by name)
+        'regex' => '#^/spas/(?P<modelName>.+)$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'get',
+        'http-method' => 'GET'
+    ),
+    array( // Read file (by name)
+        'regex' => '#^/spas/(?P<modelName>.+)/file$#',
+        'model' => 'Marketplace_Views_Spa',
+        'method' => 'download',
+        'http-method' => 'GET'
+    ),
+    array( // Delete (by name)
         'regex' => '#^/spas/(?P<modelName>.+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'delete',
@@ -79,19 +109,5 @@ return array(
             'User_Precondition::ownerRequired'
         )
     ),
-    /*
-     * Template
-     */
-    array(
-        'regex' => '#^/templates/(?P<modelName>.+)/file$#',
-        'model' => 'Marketplace_Views_Template',
-        'method' => 'download',
-        'http-method' => 'GET'
-    ),
-    array(
-        'regex' => '#^/template/(?P<modelName>.+)$#',
-        'model' => 'Marketplace_Views_Template',
-        'method' => 'get',
-        'http-method' => 'GET'
-    )
+   
 );
