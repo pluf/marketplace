@@ -35,7 +35,7 @@ class Marketplace_Spa extends Pluf_Model
      */
     function init()
     {
-        $this->_a['table'] = 'marketplace_spa';
+        $this->_a['table'] = 'marketplace_spas';
         $this->_a['cols'] = array(
             'id' => array(
                 'type' => 'Pluf_DB_Field_Sequence',
@@ -44,56 +44,56 @@ class Marketplace_Spa extends Pluf_Model
             'name' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
                 'unique' => true,
-                'blank' => false,
+                'is_null' => false,
                 'size' => 50,
                 'readable' => true,
                 'editable' => false
             ),
             'version' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => false,
+                'is_null' => false,
                 'size' => 100,
                 'readable' => true,
                 'editable' => false
             ),
             'title' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => true,
+                'is_null' => true,
                 'size' => 50,
                 'readable' => true,
                 'editable' => true
             ),
             'token' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => true,
+                'is_null' => true,
                 'size' => 50,
                 'readable' => false,
                 'editable' => false
             ),
             'state' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => false,
+                'is_null' => false,
                 'size' => 50,
                 'readable' => true,
                 'editable' => false
             ),
             'license' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => true,
+                'is_null' => true,
                 'size' => 250,
                 'readable' => true,
                 'editable' => false
             ),
             'description' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => true,
+                'is_null' => true,
                 'size' => 250,
                 'readable' => false,
                 'editable' => false
             ),
             'file' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => false,
+                'is_null' => false,
                 'size' => 100,
                 'verbose' => 'SPA installation path',
                 'readable' => false,
@@ -101,18 +101,18 @@ class Marketplace_Spa extends Pluf_Model
             ),
             'homepage' => array(
                 'type' => 'Pluf_DB_Field_Varchar',
-                'blank' => true,
+                'is_null' => true,
                 'size' => 100
             ),
             'creation_dtime' => array(
                 'type' => 'Pluf_DB_Field_Datetime',
-                'blank' => true,
+                'is_null' => true,
                 'readable' => true,
                 'editable' => false
             ),
             'modif_dtime' => array(
                 'type' => 'Pluf_DB_Field_Datetime',
-                'blank' => true,
+                'is_null' => true,
                 'readable' => true,
                 'editable' => false
             )
@@ -146,5 +146,10 @@ class Marketplace_Spa extends Pluf_Model
         // TODO: maso, 1395: از signal-slot استفاده شود و یک signal ارسال شود تا
         // سایرین که به
         // این spa وابسته هستند داده‌های مربوطه‌شان را حذف کنند.
+        // remove related file
+        $filename = $this->file;
+        if (is_file($filename)) {
+            unlink($filename);
+        }
     }
 }
