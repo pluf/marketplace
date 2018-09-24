@@ -33,101 +33,91 @@ class Marketplace_Spa extends Pluf_Model
      * {@inheritdoc}
      * @see Pluf_Model::init()
      */
-    function init ()
+    function init()
     {
         $this->_a['table'] = 'marketplace_spa';
         $this->_a['cols'] = array(
-                'id' => array(
-                        'type' => 'Pluf_DB_Field_Sequence',
-                        'blank' => true
-                ),
-                'name' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => false,
-                        'size' => 50,
-                        'readable' => true,
-                        'editable' => false
-                ),
-                'version' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => false,
-                        'size' => 100,
-                        'readable' => true,
-                        'editable' => false
-                ),
-                'title' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => true,
-                        'size' => 50,
-                        'readable' => true,
-                        'editable' => true
-                ),
-                'token' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => true,
-                        'size' => 50,
-                        'readable' => false,
-                        'editable' => false
-                ),
-                'state' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => false,
-                        'size' => 50,
-                        'readable' => true,
-                        'editable' => false
-                ),
-                'license' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => true,
-                        'size' => 250,
-                        'readable' => true,
-                        'editable' => false
-                ),
-                'description' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => true,
-                        'size' => 250,
-                        'readable' => false,
-                        'editable' => false
-                ),
-                'file' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => false,
-                        'size' => 100,
-                        'verbose' => 'SPA installation path',
-                        'readable' => false,
-                        'editable' => false
-                ),
-                'homepage' => array(
-                        'type' => 'Pluf_DB_Field_Varchar',
-                        'blank' => true,
-                        'size' => 100
-                ),
-                'creation_dtime' => array(
-                        'type' => 'Pluf_DB_Field_Datetime',
-                        'blank' => true,
-                        'readable' => true,
-                        'editable' => false
-                ),
-                'modif_dtime' => array(
-                        'type' => 'Pluf_DB_Field_Datetime',
-                        'blank' => true,
-                        'readable' => true,
-                        'editable' => false
-                )
+            'id' => array(
+                'type' => 'Pluf_DB_Field_Sequence',
+                'blank' => true
+            ),
+            'name' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'unique' => true,
+                'blank' => false,
+                'size' => 50,
+                'readable' => true,
+                'editable' => false
+            ),
+            'version' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => false,
+                'size' => 100,
+                'readable' => true,
+                'editable' => false
+            ),
+            'title' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => true,
+                'size' => 50,
+                'readable' => true,
+                'editable' => true
+            ),
+            'token' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => true,
+                'size' => 50,
+                'readable' => false,
+                'editable' => false
+            ),
+            'state' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => false,
+                'size' => 50,
+                'readable' => true,
+                'editable' => false
+            ),
+            'license' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => true,
+                'size' => 250,
+                'readable' => true,
+                'editable' => false
+            ),
+            'description' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => true,
+                'size' => 250,
+                'readable' => false,
+                'editable' => false
+            ),
+            'file' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => false,
+                'size' => 100,
+                'verbose' => 'SPA installation path',
+                'readable' => false,
+                'editable' => false
+            ),
+            'homepage' => array(
+                'type' => 'Pluf_DB_Field_Varchar',
+                'blank' => true,
+                'size' => 100
+            ),
+            'creation_dtime' => array(
+                'type' => 'Pluf_DB_Field_Datetime',
+                'blank' => true,
+                'readable' => true,
+                'editable' => false
+            ),
+            'modif_dtime' => array(
+                'type' => 'Pluf_DB_Field_Datetime',
+                'blank' => true,
+                'readable' => true,
+                'editable' => false
+            )
         );
-        
-        $this->_a['idx'] = array(
-                'spa_idx' => array(
-                        'col' => 'name',
-                        'type' => 'unique', // normal, unique, fulltext, spatial
-                        'index_type' => '', // hash, btree
-                        'index_option' => '',
-                        'algorithm_option' => '',
-                        'lock_option' => ''
-                )
-        );
-        
+
         $this->_a['views'] = array();
     }
 
@@ -136,7 +126,7 @@ class Marketplace_Spa extends Pluf_Model
      * {@inheritdoc}
      * @see Pluf_Model::preSave()
      */
-    function preSave ($create = false)
+    function preSave($create = false)
     {
         if ($this->id == '') {
             $this->creation_dtime = gmdate('Y-m-d H:i:s');
@@ -149,7 +139,7 @@ class Marketplace_Spa extends Pluf_Model
      * {@inheritdoc}
      * @see Pluf_Model::preDelete()
      */
-    function preDelete ()
+    function preDelete()
     {
         // @unlink(Pluf::f('upload_issue_path').'/'.$this->attachment);
         // TODO: hadi, 1395: قبل از حذف spa فایل‌های مربوط به این spa حذف شود
