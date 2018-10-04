@@ -99,7 +99,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         ));
         $spa = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
         if (! isset($spa)) {
-            throw new Pluf_HTTP_Error404("Object not found (SAP," . $match['token'] . ")");
+            throw new Pluf_HTTP_Error404("Object not found (Marketplace_Spa," . $match['token'] . ")");
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
         return static::prepareSpa($request, $spa);

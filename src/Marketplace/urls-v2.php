@@ -74,13 +74,13 @@ return array(
         )
     ),
     array( // Update (by token)
-        'regex' => '#^/spas/token-(?P<token>.+)$#',
+        'regex' => '#^/spas/token-(?P<token>[^/]+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'updateByToken',
         'http-method' => 'POST'
     ),
     array( // Update (by name)
-        'regex' => '#^/spas/(?P<modelName>.+)$#',
+        'regex' => '#^/spas/(?P<modelName>[^/]+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'update',
         'http-method' => 'POST',
@@ -89,19 +89,19 @@ return array(
         )
     ),
     array( // Read (by name)
-        'regex' => '#^/spas/(?P<modelName>.+)$#',
+        'regex' => '#^/spas/(?P<modelName>[^/]+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'get',
         'http-method' => 'GET'
     ),
     array( // Read file (by name)
-        'regex' => '#^/spas/(?P<modelName>.+)/file$#',
+        'regex' => '#^/spas/(?P<modelName>[^/]+)/file$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'download',
         'http-method' => 'GET'
     ),
     array( // Delete (by name)
-        'regex' => '#^/spas/(?P<modelName>.+)$#',
+        'regex' => '#^/spas/(?P<modelName>[^/]+)$#',
         'model' => 'Marketplace_Views_Spa',
         'method' => 'delete',
         'http-method' => 'DELETE',
