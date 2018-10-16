@@ -23,7 +23,7 @@
  * @author maso<mostafa.barmshory@dpq.co.ir>
  *        
  */
-class Marketplace_Views_Spa extends Pluf_Views
+class Marketplace_Views_Temlate extends Pluf_Views
 {
 
     /**
