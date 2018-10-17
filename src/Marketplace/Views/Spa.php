@@ -43,7 +43,7 @@ class Marketplace_Views_Spa extends Pluf_Views
             $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'read');
-        return $spa;
+        return static::prepareSpa($request, $spa);
     }
 
     /**
@@ -60,7 +60,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         $spa->create();
         try {
             Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'create');
-            return $spa;
+            return static::prepareSpa($request, $spa);
         } catch (Exception $e) {
             $spa->delete();
             throw $e;
@@ -81,7 +81,7 @@ class Marketplace_Views_Spa extends Pluf_Views
             $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
-        return $spa;
+        return static::prepareSpa($request, $spa);
     }
 
     /**
@@ -99,10 +99,10 @@ class Marketplace_Views_Spa extends Pluf_Views
         ));
         $spa = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
         if (! isset($spa)) {
-            throw new Pluf_HTTP_Error404("Object not found (SAP," . $match['token'] . ")");
+            throw new Pluf_HTTP_Error404("Object not found (Marketplace_Spa," . $match['token'] . ")");
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'update');
-        return $spa;
+        return static::prepareSpa($request, $spa);
     }
 
     /**
@@ -119,9 +119,20 @@ class Marketplace_Views_Spa extends Pluf_Views
             $spa = Marketplace_Shortcuts_GetSpaOr404ByName($match['modelName']);
         }
         Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'delete');
-        return $spa;
+        return static::prepareSpa($request, $spa);
     }
 
+    /**
+     * If user is owner set feild token as readable esle set it unreadable.
+     * @param Pluf_HTTP_Request $request
+     * @param Marketplace_Spa $spa
+     * @return Marketplace_Spa
+     */
+    private static function prepareSpa($request, $spa){
+        $spa->_a['cols']['token']['readable'] = User_Precondition::isOwner($request);
+        return $spa;
+    }
+    
     /**
      * Download an spa
      *
