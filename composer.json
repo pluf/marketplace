@@ -16,11 +16,11 @@
 		}
 	],
 	"require" : {
-		"pluf/user" : "^4.0.0",
-		"pluf/tenant" : "^4.0.0"
+		"pluf/user" : "5.0.x",
+		"pluf/tenant" : "5.0.x"
 	},
 	"require-dev" : {
-		"pluf/test" : "^4.0.0"
+		"pluf/test" : "5.0.x"
 	},
 	"include-path" : [
 		"src/"
