@@ -21,6 +21,7 @@ use PHPUnit\Framework\IncompleteTestError;
 require_once 'Pluf.php';
 
 /**
+ *
  * @backupGlobals disabled
  * @backupStaticAttributes disabled
  */
@@ -30,6 +31,7 @@ class Marketplace_REST_BasicsTest extends TestCase
     private static $client = null;
 
     /**
+     *
      * @beforeClass
      */
     public static function createDataBase()
@@ -38,28 +40,45 @@ class Marketplace_REST_BasicsTest extends TestCase
         $m = new Pluf_Migration(Pluf::f('installed_apps'));
         $m->install();
         $m->init();
-        
-        $user = new User(1);
-        $rol = Role::getFromString('Pluf.owner');
-        $user->setAssoc($rol);
-        
+
+        // Test user
+        $user = new User_Account();
+        $user->login = 'test';
+        $user->is_active = true;
+        if (true !== $user->create()) {
+            throw new Exception();
+        }
+        // Credential of user
+        $credit = new User_Credential();
+        $credit->setFromFormData(array(
+            'account_id' => $user->id
+        ));
+        $credit->setPassword('test');
+        if (true !== $credit->create()) {
+            throw new Exception();
+        }
+
+        $per = User_Role::getFromString('tenant.owner');
+        $user->setAssoc($per);
+
         self::$client = new Test_Client(array(
             array(
                 'app' => 'User',
-                'regex' => '#^/api/user#',
+                'regex' => '#^/api/v2/user#',
                 'base' => '',
-                'sub' => include 'User/urls.php'
+                'sub' => include 'User/urls-v2.php'
             ),
             array(
                 'app' => 'Marketplace',
-                'regex' => '#^/api/marketplace#',
+                'regex' => '#^/api/v2/marketplace#',
                 'base' => '',
-                'sub' => include 'Marketplace/urls.php'
+                'sub' => include 'Marketplace/urls-v2.php'
             )
         ));
     }
 
     /**
+     *
      * @afterClass
      */
     public static function removeDatabses()
@@ -69,11 +88,12 @@ class Marketplace_REST_BasicsTest extends TestCase
     }
 
     /**
+     *
      * @test
      */
     public function anonymousCanGetListOfSpas()
     {
-        $response = self::$client->get('/api/marketplace/spa/find');
+        $response = self::$client->get('/api/v2/marketplace/spas');
         Test_Assert::assertResponseNotNull($response, 'Find result is empty');
         Test_Assert::assertResponseStatusCode($response, 200, 'Find status code is not 200');
         Test_Assert::assertResponsePaginateList($response, 'Find result is not JSON paginated list');
