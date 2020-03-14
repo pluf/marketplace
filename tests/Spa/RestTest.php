@@ -16,16 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\IncompleteTestError;
-require_once 'Pluf.php';
+namespace Pluf\Test\Spa;
 
-/**
- *
- * @backupGlobals disabled
- * @backupStaticAttributes disabled
- */
-class Marketplace_REST_BasicsTest extends TestCase
+use Exception;
+
+class RestTest extends TestCase
 {
 
     private static $client = null;
@@ -37,7 +32,7 @@ class Marketplace_REST_BasicsTest extends TestCase
     public static function createDataBase()
     {
         Pluf::start(__DIR__ . '/../conf/config.php');
-        $m = new Pluf_Migration(Pluf::f('installed_apps'));
+        $m = new Pluf_Migration();
         $m->install();
         $m->init();
 
@@ -61,20 +56,7 @@ class Marketplace_REST_BasicsTest extends TestCase
         $per = User_Role::getFromString('tenant.owner');
         $user->setAssoc($per);
 
-        self::$client = new Test_Client(array(
-            array(
-                'app' => 'User',
-                'regex' => '#^/api/v2/user#',
-                'base' => '',
-                'sub' => include 'User/urls-v2.php'
-            ),
-            array(
-                'app' => 'Marketplace',
-                'regex' => '#^/api/v2/marketplace#',
-                'base' => '',
-                'sub' => include 'Marketplace/urls-v2.php'
-            )
-        ));
+        self::$client = new Client();
     }
 
     /**
@@ -83,7 +65,7 @@ class Marketplace_REST_BasicsTest extends TestCase
      */
     public static function removeDatabses()
     {
-        $m = new Pluf_Migration(Pluf::f('installed_apps'));
+        $m = new Pluf_Migration();
         $m->unInstall();
     }
 
@@ -93,10 +75,10 @@ class Marketplace_REST_BasicsTest extends TestCase
      */
     public function anonymousCanGetListOfSpas()
     {
-        $response = self::$client->get('/api/v2/marketplace/spas');
-        Test_Assert::assertResponseNotNull($response, 'Find result is empty');
-        Test_Assert::assertResponseStatusCode($response, 200, 'Find status code is not 200');
-        Test_Assert::assertResponsePaginateList($response, 'Find result is not JSON paginated list');
+        $response = self::$client->get('/marketplace/spas');
+        $this->assertResponseNotNull($response, 'Find result is empty');
+        $this->assertResponseStatusCode($response, 200, 'Find status code is not 200');
+        $this->assertResponsePaginateList($response, 'Find result is not JSON paginated list');
     }
 }
 

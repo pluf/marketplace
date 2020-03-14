@@ -1,6 +1,5 @@
 {
 	"name": "Marketplace",
-	"version": "5.5.0",
 	"title": "Pluf market place",
 	"model": [
 		"Marketplace_Spa",
