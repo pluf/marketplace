@@ -31,12 +31,12 @@
 			"" : "src"
 		},
 		"psr-4" : {
-			"Pluf\\Marketplace" : "src6"
+			"Pluf\\Marketplace\\" : "src6"
 		}
 	},
 	"autoload-dev" : {
 		"psr-4" : {
-			"Pluf\\Test" : "tests"
+			"Pluf\\Test\\" : "tests"
 		}
 	},
 	"homepage" : "https://github.com/pluf/marketplace",

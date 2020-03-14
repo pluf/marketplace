@@ -18,7 +18,14 @@
  */
 namespace Pluf\Test\Spa;
 
+use Pluf\Test\Client;
+use Pluf\Test\TestCase;
 use Exception;
+use Pluf;
+use Pluf_Migration;
+use User_Account;
+use User_Credential;
+use User_Role;
 
 class RestTest extends TestCase
 {
