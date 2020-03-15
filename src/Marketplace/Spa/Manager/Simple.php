@@ -16,7 +16,7 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
      * @var array
      */
     static $STATE_MACHINE = array(
-        Workflow_Machine::STATE_UNDEFINED => array(
+        Pluf\Workflow\Machine::STATE_UNDEFINED => array(
             'next' => 'Published',
             'visible' => false,
             'action' => array(
@@ -83,7 +83,7 @@ class Marketplace_Spa_Manager_Simple implements Marketplace_Spa_Manager
      */
     public function apply($spa, $action)
     {
-        $machine = new Workflow_Machine();
+        $machine = new Pluf\Workflow\Machine();
         return $machine->setStates(self::$STATE_MACHINE)
             ->setSignals(array(
             'Marketplace_Spa::stateChange'

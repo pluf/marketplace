@@ -8,8 +8,6 @@ $cfg['installed_apps'] = array(
     'Tenant',
     'Monitor',
     'User',
-    'Group',
-    'Role',
     'Marketplace',
 );
 
@@ -34,7 +32,7 @@ $cfg['secret_key'] = '5a8d7e0f2aad8bdab8f6eef725412850';
 // cached data and other temporary resources.
 // It must be writeable by your webserver instance.
 // It is mandatory if you are using the template system.
-$cfg['tmp_folder'] = __DIR__ . '/../tmp';
+$cfg['tmp_folder'] = '/tmp';
 
 // The folder in which the templates of the application are located.
 $cfg['template_folders'] = array(
