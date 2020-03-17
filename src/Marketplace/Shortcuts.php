@@ -76,7 +76,8 @@ function Marketplace_Shortcuts_GetSpaOr404ByName($name)
     $sql = new Pluf_SQL('name=%s', array(
         $name
     ));
-    $item = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
+    $mk = new Marketplace_Spa();
+    $item = $mk->getOne($sql->gen());
     if (isset($item) && $item->name == $name) {
         return $item;
     }
