@@ -22,7 +22,7 @@ $cfg['debug'] = true;
  * Middlewares
  */
 $cfg['middleware_classes'] = array(
-    'Pluf_Middleware_Session',
+    '\Pluf\Middleware\Session',
     'User_Middleware_Session'
 );
 
