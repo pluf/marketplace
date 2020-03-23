@@ -97,7 +97,7 @@ class Marketplace_Views_Spa extends Pluf_Views
         $sql = new Pluf_SQL('token=%s', array(
             $match['token']
         ));
-        $spa = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
+        $spa = Pluf::factory(Marketplace_Spa::class)->getOne($sql->gen());
         if (! isset($spa)) {
             throw new Pluf_HTTP_Error404("Object not found (Marketplace_Spa," . $match['token'] . ")");
         }

@@ -33,7 +33,7 @@ function Marketplace_Shortcuts_SpaUpdate($request, $spa)
     $key = 'spa-' . md5(microtime() . rand(0, 123456789));
     $dir = Pluf_Tenant::storagePath() . '/repository/' . $key;
     if (! mkdir($dir, 0777, true)) {
-        throw new Pluf_Exception('Failed to create folder in temp');
+        throw new \Pluf\Exception('Failed to create folder in temp');
     }
     
     // Unzip to temp folder
@@ -42,7 +42,7 @@ function Marketplace_Shortcuts_SpaUpdate($request, $spa)
         $zip->extractTo($dir);
         $zip->close();
     } else {
-        throw new Pluf_Exception('Unable to unzip SPA.');
+        throw new \Pluf\Exception('Unable to unzip SPA.');
     }
     
     // 2- load infor
@@ -76,7 +76,8 @@ function Marketplace_Shortcuts_GetSpaOr404ByName($name)
     $sql = new Pluf_SQL('name=%s', array(
         $name
     ));
-    $item = Pluf::factory('Marketplace_Spa')->getOne($sql->gen());
+    $mk = new Marketplace_Spa();
+    $item = $mk->getOne($sql->gen());
     if (isset($item) && $item->name == $name) {
         return $item;
     }
