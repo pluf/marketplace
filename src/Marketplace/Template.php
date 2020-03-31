@@ -42,85 +42,85 @@ class Marketplace_Template extends Pluf_Model
         $this->_a['cols'] = array(
             // شناسه‌ها
             'id' => array(
-                'type' => 'Pluf_DB_Field_Sequence',
+                'type' => 'Sequence',
                 'blank' => false,
                 'editable' => false
             ),
             // فیلدها
             'token' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => true,
                 'size' => 64,
                 'readable' => false,
                 'editable' => false
             ),
             'state' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'size' => 64,
                 'editable' => false,
                 'readable' => true
             ),
             'name' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => true,
                 'size' => 64,
                 'editable' => true
             ),
             'title' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => true,
                 'size' => 250,
                 'default' => 'no title',
                 'editable' => true
             ),
             'description' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => true,
                 'size' => 250,
                 'default' => 'auto created template',
                 'editable' => true
             ),
             'mime_type' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => false,
                 'size' => 64,
                 'default' => 'application/octet-stream',
                 'editable' => false
             ),
             'file_path' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => false,
                 'size' => 250,
                 'editable' => false,
                 'readable' => false
             ),
             'file_name' => array(
-                'type' => 'Pluf_DB_Field_Varchar',
+                'type' => 'Varchar',
                 'blank' => false,
                 'size' => 250,
                 'default' => 'unknown',
                 'editable' => false
             ),
             'file_size' => array(
-                'type' => 'Pluf_DB_Field_Integer',
+                'type' => 'Integer',
                 'blank' => false,
                 'default' => 'no title',
                 'editable' => false
             ),
             'downloads' => array(
-                'type' => 'Pluf_DB_Field_Integer',
+                'type' => 'Integer',
                 'blank' => false,
                 'default' => 0,
                 'default' => 'no title',
                 'editable' => false
             ),
             'creation_dtime' => array(
-                'type' => 'Pluf_DB_Field_Datetime',
+                'type' => 'Datetime',
                 'blank' => true,
                 'editable' => false
             ),
             'modif_dtime' => array(
-                'type' => 'Pluf_DB_Field_Datetime',
+                'type' => 'Datetime',
                 'blank' => true,
                 'editable' => false
             )
