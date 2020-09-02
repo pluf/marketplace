@@ -57,6 +57,8 @@ class Marketplace_Views_Spa extends Pluf_Views
         // 1- upload & extract
         $spa = new Marketplace_Spa();
         $spa->name = 'name' . rand();
+        $spa->version = '0.0.0';
+        $spa->state = 'unknown';
         $spa->create();
         try {
             Marketplace_Shortcuts_SpaManager($spa)->apply($spa, 'create');
