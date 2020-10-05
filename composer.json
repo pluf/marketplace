@@ -1,6 +1,6 @@
 {
 	"name" : "pluf/marketplace",
-	"version" : "6.0.14",
+	"version" : "6.0.15",
 	"description" : "A module for Pluf to implement a marketplace for SPAs",
 	"type" : "library",
 	"license" : "MIT",
